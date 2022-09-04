@@ -2,7 +2,7 @@
 
 # Variables
 resourceGroup="acdnd-c4-project"
-location="westus"
+location="centralus"
 osType="UbuntuLTS"
 vmssName="udacity-vmss"
 adminName="udacityadmin"
@@ -14,7 +14,7 @@ nsgName="$vmssName-nsg"
 vnetName="$vmssName-vnet"
 subnetName="$vnetName-subnet"
 probeName="tcpProbe"
-vmSize="Standard_B1s"
+vmSize="Standard_D2ads_v5"
 storageType="Standard_LRS"
 
 # Create resource group. 
@@ -69,7 +69,7 @@ az vmss create \
   --upgrade-policy-mode automatic \
   --admin-username $adminName \
   --generate-ssh-keys \
-  --verbose 
+  --verbose
 
 echo "VM scale set created: $vmssName"
 
@@ -146,3 +146,6 @@ az network nsg rule create \
 echo "Port 22 added to NSG: $nsgName"
 
 echo "VMSS script completed!"
+
+az vmss list-instance-connection-info --resource-group acdnd-c4-project --name udacity-vmss
+ssh -p 50000 udacityadmin@40.113.203.205

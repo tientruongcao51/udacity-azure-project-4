@@ -20,18 +20,18 @@ from opencensus.ext.flask.flask_middleware import FlaskMiddleware
 
 # Logging
 logger = logging.getLogger(__name__)
-logger.addHandler(AzureLogHandler(connection_string='InstrumentationKey=e56579ca-3c64-4817-8df2-20a13a81b7bd'))
-logger.addHandler(AzureEventHandler(connection_string='InstrumentationKey=e56579ca-3c64-4817-8df2-20a13a81b7bd'))
+logger.addHandler(AzureLogHandler(connection_string='InstrumentationKey=fc1b6061-56f3-4bfc-a383-65d8440855a4'))
+logger.addHandler(AzureEventHandler(connection_string='InstrumentationKey=fc1b6061-56f3-4bfc-a383-65d8440855a4'))
 
 # Metrics
 exporter = metrics_exporter.new_metrics_exporter(
     enable_standard_metrics=True,
-    connection_string='InstrumentationKey=e56579ca-3c64-4817-8df2-20a13a81b7bd')
+    connection_string='InstrumentationKey=fc1b6061-56f3-4bfc-a383-65d8440855a4')
 
 # Tracing
 tracer = Tracer(
     exporter=AzureExporter(
-        connection_string='InstrumentationKey=e56579ca-3c64-4817-8df2-20a13a81b7bd'),
+        connection_string='InstrumentationKey=fc1b6061-56f3-4bfc-a383-65d8440855a4'),
     sampler=ProbabilitySampler(1.0),
 )
 
@@ -40,7 +40,7 @@ app = Flask(__name__)
 # Requests
 middleware = FlaskMiddleware(
     app,
-    exporter=AzureExporter(connection_string="InstrumentationKey=e56579ca-3c64-4817-8df2-20a13a81b7bd"),
+    exporter=AzureExporter(connection_string="InstrumentationKey=fc1b6061-56f3-4bfc-a383-65d8440855a4"),
     sampler=ProbabilitySampler(rate=1.0),
 )
 # Load configurations from environment or config file
