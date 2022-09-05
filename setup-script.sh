@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Variables
-resourceGroup="acdnd-c4-project"
-location="centralus"
+resourceGroup="cloud-demo"
+location="southcentralus"
 osType="UbuntuLTS"
 vmssName="udacity-vmss"
 adminName="udacityadmin"
-storageAccount="udacitydiag$RANDOM"
+storageAccount="truongcao$RANDOM"
 bePoolName="$vmssName-bepool"
 lbName="$vmssName-lb"
 lbRule="$lbName-network-rule"
@@ -14,19 +14,19 @@ nsgName="$vmssName-nsg"
 vnetName="$vmssName-vnet"
 subnetName="$vnetName-subnet"
 probeName="tcpProbe"
-vmSize="Standard_D2ads_v5"
+vmSize="Standard_D2s_v3"
 storageType="Standard_LRS"
 
-# Create resource group. 
-# This command will not work for the Cloud Lab users. 
-# Cloud Lab users can comment this command and 
-# use the existing Resource group name, such as, resourceGroup="cloud-demo-153430" 
+# Create resource group.
+# This command will not work for the Cloud Lab users.
+# Cloud Lab users can comment this command and
+# use the existing Resource group name, such as, resourceGroup="cloud-demo-153430"
 echo "STEP 0 - Creating resource group $resourceGroup..."
-
-az group create \
---name $resourceGroup \
---location $location \
---verbose
+echo "Skipped because I am using the Lab enviroment"
+# az group create \
+# --name $resourceGroup \
+# --location $location \
+# --verbose
 
 echo "Resource group created: $resourceGroup"
 
@@ -147,5 +147,21 @@ echo "Port 22 added to NSG: $nsgName"
 
 echo "VMSS script completed!"
 
-az vmss list-instance-connection-info --resource-group acdnd-c4-project --name udacity-vmss
-ssh -p 50000 udacityadmin@40.113.203.205
+#
+#}
+#Network security group created: udacity-vmss-nsg
+#STEP 3 - Creating VM scale set udacity-vmss
+#INFO: Use existing SSH public key file: C:\Users\tient\.ssh\id_rsa.pub
+#WARNING: It is recommended to use parameter "--lb-sku Standard" to create new VMSS with Standard load balancer. Please note that the default load balancer used for VMSS creation will be changed from Basic to Standard in the future.
+#ERROR: {"error":{"code":"InvalidTemplateDeployment","message":"The template deployment failed because of policy violation. Please see details for more information.","details":[{"code":"RequestDisallowedByPolicy","target":"udacity-vmss","message":"Resource 'udacity-vmss' was disallowed by policy. Policy identifiers: '[{\"policyAssignment\":{\"name\":\"cloud-demo513-PolicyDefinition\",\"id\":\"/subscriptions/17fc1a23-7619-4af8-9180-e8388fc413a3/providers/Microsoft.Authorization/policyAssignments/cloud-demo513-PolicyDefinition\"},\"policyDefinition\":{\"name\":\"cloud-demo513-PolicyDefinition\",\"id\":\"/subscriptions/17fc1a23-7619-4af8-9180-e8388fc413a3/providers/Microsoft.Authorization/policyDefinitions/cloud-demo513-PolicyDefinition\"}},{\"policyAssignment\":{\"name\":\"UdacityCommon policy definition\",\"id\":\"/providers/Microsoft.Management/managementGroups/udacitydedicatedsubscriptionGroup1/providers/Microsoft.Authorization/policyAssignments/891f056473974f7289c7b312\"},\"policyDefinition\":{\"name\":\"UdacityCommon policy definition\",\"id\":\"/providers/Microsoft.Management/managementGroups/udacitydedicatedsubscriptionGroup1/providers/Microsoft.Authorization/policyDefinitions/UdacityCommonPolicyDefinition\"}}]'.","additionalInfo":[{"type":"PolicyViolation","info":{"evaluationDetails":{"evaluatedExpressions":[{"result":"True","expressionKind":"Field","expression":"type","path":"type","expressionValue":"Microsoft.Compute/virtualMachineScaleSets","targetValue":"Microsoft.Compute/virtualMachineScaleSets","operator":"Equals"},{"result":"False","expressionKind":"Field","expression":"Microsoft.Compute/virtualMachineScaleSets/sku.name","path":"sku.name","expressionValue":"Standard_D2as_v4","targetValue":["Standard_D1_v2","Standard_D2_v2","Standard_D3_v2","Standard_D2s_v3","Standard_D4s_v3","Standard_B1s","Standard_B2s","Standard_B1ms","Standard_B2ms","Standard_B4ms","Standard_D2s_v2","Standard_DS1_v2","Standard_DS2_v2","Standard_DS3_v2","Standard_DS1","Standard_DS2","Standard_DS3"],"operator":"In"}]},"policyDefinitionId":"/subscriptions/17fc1a23-7619-4af8-9180-e8388fc413a3/providers/Microsoft.Authorization/policyDefinitions/cloud-demo513-PolicyDefinition","policyDefinitionName":"cloud-demo513-PolicyDefinition","policyDefinitionDisplayName":"cloud-demo513-PolicyDefinition","policyDefinitionEffect":"deny","policyAssignmentId":"/subscriptions/17fc1a23-7619-4af8-9180-e8388fc413a3/providers/Microsoft.Authorization/policyAssignments/cloud-demo513-PolicyDefinition","policyAssignmentName":"cloud-demo513-PolicyDefinition","policyAssignmentDisplayName":"cloud-demo513-PolicyDefinition","policyAssignmentScope":"/subscriptions/17fc1a23-7619-4af8-9180-e8388fc413a3","policyAssignmentParameters":{}}},{"type":"PolicyViolation","info":{"evaluationDetails":{"evaluatedExpressions":[{"result":"True","expressionKind":"Field","expression":"type","path":"type","expressionValue":"Microsoft.Compute/virtualMachineScaleSets","targetValue":"Microsoft.Compute/virtualMachineScaleSets","operator":"Equals"},{"result":"False","expressionKind":"Field","expression":"Microsoft.Compute/virtualMachineScaleSets/sku.name","path":"sku.name","expressionValue":"Standard_D2as_v4","targetValue":["Standard_D1_v2","Standard_D2_v2","Standard_D3_v2","Standard_D2s_v3","Standard_D4s_v3","Standard_B1s","Standard_B2s","Standard_B1ms","Standard_B2ms","Standard_B4ms","Standard_D2s_v2","Standard_DS1_v2","Standard_DS2_v2","Standard_DS3_v2","Standard_DS1","Standard_DS2","Standard_DS3"],"operator":"In"}]},"policyDefinitionId":"/providers/Microsoft.Management/managementGroups/udacitydedicatedsubscriptionGroup1/providers/Microsoft.Authorization/policyDefinitions/UdacityCommonPolicyDefinition","policyDefinitionName":"UdacityCommonPolicyDefinition","policyDefinitionDisplayName":"UdacityCommon policy definition","policyDefinitionEffect":"deny","policyAssignmentId":"/providers/Microsoft.Management/managementGroups/udacitydedicatedsubscriptionGroup1/providers/Microsoft.Authorization/policyAssignments/891f056473974f7289c7b312","policyAssignmentName":"891f056473974f7289c7b312","policyAssignmentDisplayName":"UdacityCommon policy definition","policyAssignmentScope":"/providers/Microsoft.Management/managementGroups/udacitydedicatedsubscriptionGroup1","policyAssignmentParameters":{}}}]}]}}
+#INFO: Command ran in 11.258 seconds (init: 0.441, invoke: 10.817)
+#VM scale set created: udacity-vmss
+#STEP 4 - Associating NSG: udacity-vmss-nsg with subnet: udacity-vmss-vnet-subnet
+#ERROR: (ResourceNotFound) The Resource 'Microsoft.Network/virtualNetworks/udacity-vmss-vnet' under resource group 'cloud-demo' was not found. For more details please go to https://aka.ms/ARMResourceNotFoundFix
+#Code: ResourceNotFound
+#Message: The Resource 'Microsoft.Network/virtualNetworks/udacity-vmss-vnet' under resource group 'cloud-demo' was not found. For more details please go to https://aka.ms/ARMResourceNotFoundFix
+#INFO: Command ran in 1.463 seconds (init: 0.433, invoke: 1.030)
+#NSG: udacity-vmss-nsg associated with subnet: udacity-vmss-vnet-subnet
+#STEP 5 - Creating health probe tcpProbe
+#ERROR: (ResourceNotFound) The Resource 'Microsoft.Network/loadBalancers/udacity-vmss-lb' under resource group 'cloud-demo' was not found. For more details please go to https://aka.ms/ARMResourceNotFoundFix
+#Code: ResourceNotFound
